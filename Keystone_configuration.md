@@ -44,10 +44,35 @@ sudo systemctl status apache2.service
 3. Configure Horizon for WebSSO
 
 Locate the local_settings.py file. If you're not sure where it is:
+```bash
+find / -name local_settings.py
+```
+Typically, it will be under:
+```bash
+vim /opt/stack/horizon/openstack_dashboard/local/local_settings.py
+```
+Add or update the following WebSSO configuration at the end of the file:
+```bash
+WEBSSO_ENABLED = True
+WEBSSO_CHOICES = (
+    ("credentials", "Keystone Credentials"),
+    ("oidc", "OpenID Connect"),
+    ("saml2", "SAML2"),
+)
+WEBSSO_IDP_MAPPING = {
+    "saml2": ("keystone-idp", "saml2"),
+}
+WEBSSO_INITIAL_CHOICE = "saml2"
+```
 
+Then restart the necessary services:
 
+``bash
+sudo systemctl restart apache2
+sudo systemctl restart memcached
+```
 
-
+At this point, Keystone is ready to handle SAML-based federated authentication!
 
 
 
