@@ -72,7 +72,7 @@ sudo systemctl restart apache2
 sudo systemctl restart memcached
 ```
 
-At this point, Keystone is ready to handle SAML-based federated authentication!
+
 
 
 
