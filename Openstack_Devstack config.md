@@ -38,7 +38,9 @@ cd devstack
 ```
 
 
-Accessing OpenStack Dashboard (Horizon)
+
+
+# Accessing OpenStack Dashboard (Horizon)
 
 After DevStack finishes installing, you can access the **Horizon Dashboard** through your browser.
 
