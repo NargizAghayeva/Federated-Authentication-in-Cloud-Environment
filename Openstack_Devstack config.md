@@ -2,25 +2,37 @@
 
 ### 🔧 Basic Setup
 
-```bash
+
 # Update and install essential tools
+```bash
 sudo apt update && sudo apt install -y git curl
+```
 
 # Add user for DevStack
+```bash
 sudo useradd -s /bin/bash nargd
 sudo passwd nargd
+```
 
 # Create home directory
+```bash
 sudo mkdir /home/nargd
 sudo chown -R nargd:nargd /home/nargd
+```
 
 # Switch to new user
+```bash
 su - nargd
 cd /home/nargd
+```
 
 # Clone DevStack repository
+```bash
 git clone https://opendev.org/openstack/devstack.git
 cd devstack
+```
 
 # Run stack script
+```bash
 ./stack.sh
+```
