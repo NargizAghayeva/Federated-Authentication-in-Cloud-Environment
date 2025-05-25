@@ -30,7 +30,7 @@ Keystone
 
 Keycloak (as Identity Provider)
 
-SAML 2.0, OAuth2.0
+SAML , OAuth
 
 TLS 1.3 (nginx/OpenSSL)
 
