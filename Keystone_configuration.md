@@ -6,7 +6,7 @@ In DevStack, **Keystone** is pre-installed as the default identity service. To s
 
 ---
 
-#  1. Verify Keystone Identity Service
+## 1. Verify Keystone Identity Service
 
 First, make sure Keystone is up and running.
 
