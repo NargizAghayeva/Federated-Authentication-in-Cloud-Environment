@@ -1,4 +1,4 @@
-# Keycloak Integration for SAML Federation
+# Keycloak Integration for SAML/Oauth2 Federation
 
 In this section, we deploy **Keycloak** via Docker and configure it to act as a **SAML2/Oauth2 Identity Provider** for OpenStack Keystone.
 
