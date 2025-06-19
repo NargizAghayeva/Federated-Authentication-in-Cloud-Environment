@@ -30,4 +30,3 @@ openstack mapping show keycloak_mapping
 openstack mapping delete keycloak_mapping
 ```
 ---
-`
