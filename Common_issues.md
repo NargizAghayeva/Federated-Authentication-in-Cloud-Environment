@@ -6,6 +6,7 @@ Check keystone.conf under [oidc] section.
 Verify that the client_id, client_secret, and issuer match Keycloak client.
 
 Confirm user mapping exists and matches the OIDC-iss in the token.
+
 ---
 ## Logs to Check
 ```bash
