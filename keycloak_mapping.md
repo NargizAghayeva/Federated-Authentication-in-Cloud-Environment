@@ -1,6 +1,7 @@
 ---
 
 ## keycloak_mapping.json
+---
 
 ```bash
 [
