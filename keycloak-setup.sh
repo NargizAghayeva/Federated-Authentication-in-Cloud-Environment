@@ -6,6 +6,11 @@
 #!/bin/bash
 ```
 
+```bash
+source openrc admin admin
+openstack service list | grep identity
+```
+
 # Start Keycloak container
 ```
 docker run -d \
