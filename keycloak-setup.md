@@ -2,6 +2,7 @@
 ---
 
 ## `keycloak-setup.sh`
+---
 
 ```bash
 #!/bin/bash
