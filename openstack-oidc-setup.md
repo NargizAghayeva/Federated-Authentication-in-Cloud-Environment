@@ -1,5 +1,6 @@
 ---
 ## openstack-oidc-setup.sh
+---
 
 ```bash
 #!/bin/bash
