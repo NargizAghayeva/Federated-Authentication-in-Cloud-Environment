@@ -50,7 +50,7 @@ All configuration steps are modularized and explained in the following files:
 # Step 2: Deploy Keycloak
 → Follow 02-keycloak-setup.md
 
-# Step 3: (Optional) Add TLS/HTTPS via Nginx
+# Step 3: Add TLS/HTTPS via Nginx
 → Follow 03-SSL_TLS.md
 
 # Step 4: Configure Keystone Federation (OIDC)
