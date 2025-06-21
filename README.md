@@ -34,7 +34,7 @@ All configuration steps are modularized and explained in the following files:
 |------|------|-------------|
 | 1️⃣ | [`01-devstack-install.md`](./docs/01-devstack-install.md) | Install OpenStack (Zed) via Kolla Ansible |
 | 2️⃣ | [`02-keycloak-setup.md`](./docs/02-keycloak-setup.md) | Deploy and configure Keycloak for OIDC |
-| 3️⃣ | [`03-SSL_TLS.md`](./docs/03-SSL_TLS.md) *(optional but recommended)* | Secure Keycloak & Keystone with SSL via Nginx |
+| 3️⃣ | [`03-SSL_TLS.md`](./docs/03-SSL_TLS.md) | Secure Keycloak & Keystone with SSL via Nginx |
 | 4️⃣ | [`04-openstack-oidc-setup.md`](./docs/04-openstack-oidc-setup.md) | Configure Keystone for federated authentication |
 | 5️⃣ | [`05-keycloak_mapping.md`](./docs/05-keycloak_mapping.md) | Apply attribute mappings for federated users |
 | 6️⃣ | [`06-websso-horizon-settings.md`](./docs/06-websso-horizon-settings.md) | Enable Horizon WebSSO for GUI login |
