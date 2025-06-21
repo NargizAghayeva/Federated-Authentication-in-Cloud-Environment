@@ -42,3 +42,9 @@ openstack federation protocol create \
   --mapping keycloak_mapping \
   openid
 ```
+# Create Group/Project for Federated Users
+```bash
+openstack group create federated-users
+openstack project create federated-project
+openstack role add --project federated-project --group federated-users member
+```
