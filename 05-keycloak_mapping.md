@@ -28,7 +28,7 @@ openstack mapping create --rules mapping.json keycloak_mapping
       {
         "type": "OIDC-iss",
         "any_one_of": [
-          "http://<YOUR_HORIZON_IP>:8080/realms/openstack"
+          "https://<YOUR_HORIZON_IP>:8080/realms/openstack"
         ]
       }
     ]
