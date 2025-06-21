@@ -39,19 +39,17 @@ docker exec -it keycloak /opt/keycloak/bin/kcadm.sh create realms-s realm=openst
   "protocol": "openid-connect",
   "publicClient": false,
   "standardFlowEnabled": true,
-  "redirectUris": ["http://192.168.64.200:5000/v3/auth/OS-FEDERATION/websso/openid*"],
-  "baseUrl": "http://192.168.64.200:5000",
-  "secret": "yUhYAspuWZ0g0Bi3ThmRHHM0x5ZU372G"
+  "redirectUris": ["http://<YOUR_HORIZON_IP>:5000/v3/auth/OS-FEDERATION/websso/openid*"],
+  "baseUrl": "http://<YOUR_HORIZON_IP>:5000",
+  "secret": "YOUR-CLIENT-SECRET"
 }
 EOF
 ```
 # Create user
 ```bash
-docker exec -it keycloak /opt/keycloak/bin/kcadm.sh create users -r openstack \
-  -s username=test -s enabled=true -s email="test@example.com"
+docker exec -it keycloak /opt/keycloak/bin/kcadm.sh create users -r openstack -s username=test -s enabled=true -s email="test@example.com"
 ```
 # Set password
 ```bash
-docker exec -it keycloak /opt/keycloak/bin/kcadm.sh set-password -r openstack \
-  --username test --new-password test
+docker exec -it keycloak /opt/keycloak/bin/kcadm.sh set-password -r openstack  --username test --new-password test
 ```
