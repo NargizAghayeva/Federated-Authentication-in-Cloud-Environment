@@ -17,7 +17,7 @@ WEBSSO_CHOICES = (
     ("oidc", "OpenID Connect"),
 )
 OPENID_CONNECT_IDP_LABEL = "Keycloak"
-OPENID_CONNECT_AUTH_URL = "http://<YOUR_HORIZON_IP>:8080/realms/openstack/protocol/openid-connect/auth"
+OPENID_CONNECT_AUTH_URL = "https://<YOUR_HORIZON_IP>:8080/realms/openstack/protocol/openid-connect/auth"
 
 ```
 # Apply config
@@ -29,7 +29,7 @@ sudo docker restart horizon
 # Testing
 
 ```bash
-openstack --os-auth-url http://192.168.64.200:5000/v3 \
+openstack --os-auth-url https://<YOUR_HORIZON_IP>:5000/v3 \
   --os-identity-provider keycloak \
   --os-protocol openid \
   --os-discovery-endpoint http://<YOUR_HORIZON_IP>:8080/realms/openstack/.well-known/openid-configuration \
