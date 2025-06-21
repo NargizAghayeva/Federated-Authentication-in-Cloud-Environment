@@ -16,7 +16,7 @@ openid = keystone.auth.plugins.mapped.Mapped
 [oidc]
 client_id = openstack
 client_secret = yUhYAspuWZ0g0Bi3ThmRHHM0x5ZU372G
-issuer = http://<YOUR_HORIZON_IP>:8080/realms/openstack
+issuer = https://<YOUR_HORIZON_IP>:8080/realms/openstack
 response_type = code
 scope = openid email profile
 username_attribute = preferred_username
@@ -34,7 +34,7 @@ source /etc/kolla/admin-openrc.sh
 # Create identity provider
 ```bash
 openstack identity provider create \
-  --remote-id http://<YOUR_HORIZON_IP>:8080/realms/openstack \
+  --remote-id https://<YOUR_HORIZON_IP>:8080/realms/openstack \
   keycloak
 ```
 
