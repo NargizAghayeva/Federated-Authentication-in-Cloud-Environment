@@ -3,6 +3,11 @@
 ## keycloak_mapping.json
 ---
 
+# Create mapping
+```bash
+openstack mapping create --rules mapping.json keycloak_mapping
+```
+
 ```bash
 [
   {
@@ -29,4 +34,11 @@
     ]
   }
 ]
+```
+# Create protocol
+```bash
+openstack federation protocol create \
+  --identity-provider keycloak \
+  --mapping keycloak_mapping \
+  openid
 ```
