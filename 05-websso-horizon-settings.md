@@ -36,6 +36,6 @@ openstack --os-auth-url http://192.168.64.200:5000/v3 \
   token issue
 ```
 
-## You should see a token issued for the federated user.
+### You should see a token issued for the federated user.
 
-## Also test Horizon WebUI at: http://<YOUR_HORIZON_IP>/dashboard/ → Login via Keycloak
+### Also test Horizon WebUI at: http://<YOUR_HORIZON_IP>/dashboard/ → Login via Keycloak
