@@ -1,18 +1,31 @@
+
+---
+
+## `devstack-install.sh`
+---
+
+```bash
 #!/bin/bash
+```
 
 # Prepare Ubuntu
+
 ```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y python3-dev python3-pip libffi-dev gcc libssl-dev git docker.io docker-compose
 sudo systemctl enable docker && sudo systemctl start docker
 ```
+
 # Python dependencies
+
 ```bash
 sudo pip3 uninstall docker requests urllib3 -y
 sudo pip3 install docker==6.1.3 requests==2.31.0 urllib3==1.26.18
 sudo pip3 install -U pip && sudo pip3 install ansible==8.6.0
 ```
+
 # Kolla Ansible
+
 ```bash
 git clone -b stable/2024.1 https://opendev.org/openstack/kolla-ansible.git
 cd kolla-ansible
