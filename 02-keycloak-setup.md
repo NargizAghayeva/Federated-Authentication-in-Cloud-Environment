@@ -17,7 +17,7 @@ docker run -d \
   quay.io/keycloak/keycloak:23.0.7 start-dev
 ```
 # Wait a bit
-sleep 10
+
 
 # Login to Keycloak admin CLI
 ```bash
@@ -29,8 +29,7 @@ docker exec -it keycloak /opt/keycloak/bin/kcadm.sh config credentials \
 ```
 # Create realm
 ```bash
-docker exec -it keycloak /opt/keycloak/bin/kcadm.sh create realms \
-  -s realm=openstack -s enabled=true
+docker exec -it keycloak /opt/keycloak/bin/kcadm.sh create realms-s realm=openstack -s enabled=true
 ```
 # Create client
 ```bashdocker exec -i keycloak /opt/keycloak/bin/kcadm.sh create clients -r openstack -f - <<EOF
