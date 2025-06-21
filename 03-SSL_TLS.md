@@ -4,7 +4,7 @@ This guide explains how to enable **HTTPS** for your **Keycloak Identity Provide
 
 ---
 
-## 🔧 1. Generate Self-Signed SSL Certificates
+Generate Self-Signed SSL Certificates
 
 ```bash
 sudo mkdir -p /etc/ssl/keycloak
@@ -51,8 +51,8 @@ sudo systemctl restart nginx
 ```
 
 # Update OpenStack Federation Config for HTTPS
-## Update Keycloak Client Redirect URI
-## In Keycloak admin panel → Client → openstack:
+Update Keycloak Client Redirect URI
+In Keycloak admin panel → Client → openstack:
 ```bash
 Redirect URI:
 https://auth.openstack.local/v3/auth/OS-FEDERATION/websso/openid
@@ -62,22 +62,22 @@ Edit  /etc/kolla/config/horizon/_9999-custom-settings.py:
 ```bash
 OPENID_CONNECT_AUTH_URL = "https://auth.openstack.local/realms/openstack/protocol/openid-connect/auth"
 ```
-### Then reconfigure Horizon:
+Then reconfigure Horizon:
 ```bash
 sudo kolla-ansible reconfigure -i /etc/kolla/ansible/inventory/all-in-one
 sudo docker restart horizon
 ```
 # Update Keystone OIDC Settings
-### In  /etc/kolla/keystone/keystone.conf:
+In  /etc/kolla/keystone/keystone.conf:
 ```bash
 [oidc]
 issuer = https://auth.openstack.local/realms/openstack
 ```
-### In your wsgi-keystone.conf:
+In your wsgi-keystone.conf:
 ```bash
 OIDCProviderMetadataURL https://auth.openstack.local/realms/openstack/.well-known/openid-configuration
 ```
-### Then restart Keystone:
+Then restart Keystone:
 ```bash
 docker restart keystone
 ```
@@ -86,7 +86,7 @@ Edit /etc/hosts on your machine:
 ```bash
 sudo nano /etc/hosts
 ```
-### Add
+Add
 ```bash
 127.0.0.1   auth.openstack.local
 ```
