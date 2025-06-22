@@ -41,13 +41,16 @@ chmod 600 ~/.ssh/authorized_keys
 ssh localhost
 ```
 # Globals configuration
+Edit:
+```bash
+etc/kolla/globals.yml
 ```bash
 workaround_ansible_issue_8743: yes
 openstack_release: "2024.1"
 kolla_base_distro: "ubuntu"
 kolla_base_distro_version: "jammy"
 kolla_install_type: "source"
-kolla_internal_vip_address: "192.168.64.200"   
+kolla_internal_vip_address: "<YOUR_HORIZON_IP>"   
 network_interface: "ens33"  
 enable_horizon: "yes"
 enable_keystone: "yes"
