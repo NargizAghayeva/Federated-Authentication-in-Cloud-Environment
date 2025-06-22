@@ -4,7 +4,7 @@ This repository provides a complete, modular, and production-capable setup guide
 
 ---
 
-## 📚 Documentation Structure
+##  Documentation Structure
 
 | Step | File | Description |
 |------|------|-------------|
