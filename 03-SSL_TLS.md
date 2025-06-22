@@ -4,7 +4,6 @@ This guide shows how to enable HTTPS for OpenStack endpoints using **HAProxy TLS
 
 ---
 
-##  Step-by-Step Setup
 
 ###  Create Self-Signed Certificate
 
