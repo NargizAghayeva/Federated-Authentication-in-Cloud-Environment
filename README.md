@@ -1,4 +1,4 @@
-#  OpenStack + Keycloak Federated Authentication (OIDC WebSSO with HAProxy TLS)
+#  OpenStack + Keycloak Federated Authentication 
 
 This repository provides a complete, modular, and production-capable setup guide for **federating OpenStack with Keycloak** using **OpenID Connect (OIDC)** and enabling **secure WebSSO login** via Horizon. TLS is terminated using **HAProxy**, built into the Kolla Ansible architecture.
 
