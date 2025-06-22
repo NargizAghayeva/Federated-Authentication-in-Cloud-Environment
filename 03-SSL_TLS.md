@@ -6,7 +6,7 @@ This guide shows how to enable HTTPS for OpenStack endpoints using **HAProxy TLS
 
 ##  Step-by-Step Setup
 
-###  1. Create Self-Signed Certificate
+###  Create Self-Signed Certificate
 
 ```bash
 sudo mkdir -p /etc/kolla/certificates
@@ -20,7 +20,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 cat /etc/kolla/certificates/haproxy.key /etc/kolla/certificates/haproxy.crt > /etc/kolla/certificates/haproxy.pem
 cp /etc/kolla/certificates/haproxy.pem /etc/kolla/certificates/haproxy-internal.pem
 ```
-3 Ensure TLS is Enabled in Kolla
+# Ensure TLS is Enabled in Kolla
 Edit /etc/kolla/globals.yml and confirm:
 ```bash
 enable_haproxy: "yes"
@@ -29,18 +29,18 @@ kolla_enable_tls_external: "yes"
 ```
 You do not need to manually edit HAProxy configs — Kolla will detect and use the certs from /etc/kolla/certificates/
 
-Reconfigure Services to Apply TLS
+# Reconfigure Services to Apply TLS
 ```bash
 sudo kolla-ansible reconfigure -i /etc/kolla/ansible/inventory/all-in-one
 ```
 
-Test HTTPS Access
+# Test HTTPS Access
 Verify that Keystone and Horizon are accessible via TLS:
 ```bash
 curl -k https://192.168.64.200:5000/v3/
 curl -k https://192.168.64.200/dashboard/
 ```
-Update Keycloak client redirect URI:
+# Update Keycloak client redirect URI:
 ```bash
 https://<YOUR_HORIZON_IP>:5000/v3/auth/OS-FEDERATION/websso/openid
 ```
