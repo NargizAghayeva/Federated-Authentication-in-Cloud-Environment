@@ -1,116 +1,46 @@
-# Enable SSL/TLS for Keycloak and Keystone with Nginx Reverse Proxy
+#  TLS Configuration for OpenStack (HAProxy Termination with Self-Signed Certificate)
 
-This guide explains how to enable **HTTPS** for your **Keycloak Identity Provider** and **Keystone Service** using **Nginx** and **self-signed SSL certificates**.
+This guide shows how to enable HTTPS for OpenStack endpoints using **HAProxy TLS termination**, which is natively supported by **Kolla Ansible**.
 
 ---
 
-Generate Self-Signed SSL Certificates
+##  Step-by-Step Setup
+
+###  1. Create Self-Signed Certificate
 
 ```bash
-sudo mkdir -p /etc/ssl/keycloak
-```
-```bash
+sudo mkdir -p /etc/kolla/certificates
+
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-  -keyout /etc/ssl/keycloak/server.key \
-  -out /etc/ssl/keycloak/server.crt \
-  -subj "/C=HU/ST=Budapest/L=Budapest/O=SecurityLab/OU=IT/CN=auth.openstack.local"
+  -keyout /etc/kolla/certificates/haproxy.key \
+  -out /etc/kolla/certificates/haproxy.crt \
+  -subj "/C=HU/ST=Budapest/L=ELTE/O=OpenStackLab/OU=IT/CN=192.168.64.200"
 ```
-This creates a self-signed cert for auth.openstack.local
+```bash
+cat /etc/kolla/certificates/haproxy.key /etc/kolla/certificates/haproxy.crt > /etc/kolla/certificates/haproxy.pem
+cp /etc/kolla/certificates/haproxy.pem /etc/kolla/certificates/haproxy-internal.pem
+```
+3 Ensure TLS is Enabled in Kolla
+Edit /etc/kolla/globals.yml and confirm:
+```bash
+enable_haproxy: "yes"
+kolla_enable_tls_internal: "yes"
+kolla_enable_tls_external: "yes"
+```
+You do not need to manually edit HAProxy configs — Kolla will detect and use the certs from /etc/kolla/certificates/
 
-# Configure Nginx Reverse Proxy
-# Install Nginx
-```bash
-sudo apt install nginx -y
-```
-# Create a new Nginx site config:
-```bash
-/etc/nginx/sites-available/openstack_ssl
-```
-```bash
-server {
-    listen 443 ssl;
-    server_name auth.openstack.local;
-
-    ssl_certificate /etc/ssl/keycloak/server.crt;
-    ssl_certificate_key /etc/ssl/keycloak/server.key;
-
-    location / {
-        proxy_pass http://localhost:8080;  # Keycloak internal HTTP port
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-```
-# Enable the Nginx configuration
-```bash
-sudo ln -s /etc/nginx/sites-available/openstack_ssl /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx
-```
-
-# Update OpenStack Federation Config for HTTPS
-Update Keycloak Client Redirect URI
-In Keycloak admin panel → Client → openstack:
-```bash
-Redirect URI:
-https://auth.openstack.local/v3/auth/OS-FEDERATION/websso/openid
-```
-# Update Horizon Custom Settings
-Edit  /etc/kolla/config/horizon/_9999-custom-settings.py:
-```bash
-OPENID_CONNECT_AUTH_URL = "https://auth.openstack.local/realms/openstack/protocol/openid-connect/auth"
-```
-Then reconfigure Horizon:
+Reconfigure Services to Apply TLS
 ```bash
 sudo kolla-ansible reconfigure -i /etc/kolla/ansible/inventory/all-in-one
-sudo docker restart horizon
 ```
-# Update Keystone OIDC Settings
-In  /etc/kolla/keystone/keystone.conf:
+
+Test HTTPS Access
+Verify that Keystone and Horizon are accessible via TLS:
 ```bash
-[oidc]
-issuer = https://auth.openstack.local/realms/openstack
+curl -k https://192.168.64.200:5000/v3/
+curl -k https://192.168.64.200/dashboard/
 ```
-In your wsgi-keystone.conf:
+Update Keycloak client redirect URI:
 ```bash
-OIDCProviderMetadataURL https://auth.openstack.local/realms/openstack/.well-known/openid-configuration
+https://<YOUR_HORIZON_IP>:5000/v3/auth/OS-FEDERATION/websso/openid
 ```
-Then restart Keystone:
-```bash
-docker restart keystone
-```
-# Final Step: Trust the Certificate (Optional but Recommended)
-Edit /etc/hosts on your machine:
-```bash
-sudo nano /etc/hosts
-```
-Add
-```bash
-127.0.0.1   auth.openstack.local
-```
-
-In the browser:
-Visit https://auth.openstack.local and accept the self-signed cert manually.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
