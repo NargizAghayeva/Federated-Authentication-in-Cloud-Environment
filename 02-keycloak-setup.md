@@ -47,7 +47,8 @@ EOF
 ```
 # Create user
 ```bash
-docker exec -it keycloak /opt/keycloak/bin/kcadm.sh create users -r openstack -s username=test -s enabled=true -s email="test@example.com"
+docker exec -it keycloak /opt/keycloak/bin/kcadm.sh create users -r openstack -s username=test -s enabled=true
+-s email="test@example.com"
 ```
 # Set password
 ```bash
