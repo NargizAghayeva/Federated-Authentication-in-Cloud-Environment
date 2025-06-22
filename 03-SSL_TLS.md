@@ -13,7 +13,7 @@ sudo mkdir -p /etc/kolla/certificates
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout /etc/kolla/certificates/haproxy.key \
   -out /etc/kolla/certificates/haproxy.crt \
-  -subj "/C=HU/ST=Budapest/L=ELTE/O=OpenStackLab/OU=IT/CN=192.168.64.200"
+  -subj "/C=HU/ST=Budapest/L=ELTE/O=OpenStackLab/OU=IT/CN=<NAME>"
 ```
 ```bash
 cat /etc/kolla/certificates/haproxy.key /etc/kolla/certificates/haproxy.crt > /etc/kolla/certificates/haproxy.pem
@@ -36,8 +36,8 @@ sudo kolla-ansible reconfigure -i /etc/kolla/ansible/inventory/all-in-one
 # Test HTTPS Access
 Verify that Keystone and Horizon are accessible via TLS:
 ```bash
-curl -k https://192.168.64.200:5000/v3/
-curl -k https://192.168.64.200/dashboard/
+curl -k https://<YOUR_HORIZON_IP>:5000/v3/
+curl -k https://<YOUR_HORIZON_IP>/
 ```
 # Update Keycloak client redirect URI:
 ```bash
