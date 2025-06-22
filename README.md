@@ -1,63 +1,67 @@
-# 🔐 OpenStack + Keycloak Federated Authentication (OIDC WebSSO)
+#  OpenStack + Keycloak Federated Authentication (OIDC WebSSO with HAProxy TLS)
 
-This repository provides a complete, production-ready, and step-by-step guide to **integrating OpenStack with Keycloak** using **OpenID Connect (OIDC)** for federated authentication — with support for **Horizon WebSSO** and **HTTPS (TLS)**.
-
----
-
-## 📌 Project Objective
-
-✅ Enable federated login to OpenStack (Zed) via Keycloak using OIDC protocol  
-✅ Secure the connection using SSL/TLS with Nginx reverse proxy  
-✅ Fully automate and reproduce the setup using clear implementation scripts  
+This repository provides a complete, modular, and production-capable setup guide for **federating OpenStack with Keycloak** using **OpenID Connect (OIDC)** and enabling **secure WebSSO login** via Horizon. TLS is terminated using **HAProxy**, built into the Kolla Ansible architecture.
 
 ---
 
-## 🧱 System Configuration
-
-| Component       | Configuration                   |
-|----------------|----------------------------------|
-| OS             | Ubuntu 22.04                     |
-| OpenStack      | Zed (via Kolla Ansible)          |
-| Keycloak       | v23.0.7 (Docker)                 |
-| Internal VIP   | `YOUR_IP`                 |
-| Interface      | `ens33`                          |
-| Protocol       | OpenID Connect (OIDC)            |
-| Web Interface  | Horizon + WebSSO (Login via Keycloak) |
-
----
-
-## 📂 Documentation Overview
-
-All configuration steps are modularized and explained in the following files:
+## 📚 Documentation Structure
 
 | Step | File | Description |
 |------|------|-------------|
-| 1️⃣ | [`01-devstack-install.md`](./docs/01-devstack-install.md) | Install OpenStack (Zed) via Kolla Ansible |
-| 2️⃣ | [`02-keycloak-setup.md`](./docs/02-keycloak-setup.md) | Deploy and configure Keycloak for OIDC |
-| 3️⃣ | [`03-SSL_TLS.md`](./docs/03-SSL_TLS.md) | Secure Keycloak & Keystone with SSL via Nginx |
-| 4️⃣ | [`04-openstack-oidc-setup.md`](./docs/04-openstack-oidc-setup.md) | Configure Keystone for federated authentication |
-| 5️⃣ | [`05-keycloak_mapping.md`](./docs/05-keycloak_mapping.md) | Apply attribute mappings for federated users |
-| 6️⃣ | [`06-websso-horizon-settings.md`](./docs/06-websso-horizon-settings.md) | Enable Horizon WebSSO for GUI login |
+| 1️⃣ | [`01-devstack-install.md`](./01-devstack-install.md) | Install and deploy OpenStack Zed using Kolla Ansible |
+| 2️⃣ | [`02-keycloak-setup.md`](./02-keycloak-setup.md) | Deploy and configure Keycloak (Docker) |
+| 3️⃣ | [`03-SSL_TLS.md`](./03-SSL_TLS.md) | Generate TLS certs and configure HAProxy TLS termination |
+| 4️⃣ | [`04-openstack-oidc-setup.md`](./04-openstack-oidc-setup.md) | Enable OIDC federation in Keystone |
+| 5️⃣ | [`05-keycloak_mapping.md`](./05-keycloak_mapping.md) | Define and apply mapping rules (OIDC ↔ Keystone) |
+| 6️⃣ | [`06-websso-horizon-settings.md`](./06-websso-horizon-settings.md) | Enable Horizon WebSSO with Keycloak |
+| 🛠 | [`Common_issues.md`](./Common_issues.md) | Known issues and solutions during deployment |
+| 🧰 | [`troubleshooting.md`](./troubleshooting.md) | Logs, config checks, and validation tips |
 
 ---
 
-## 🚀 Quick Start (Manual Flow)
+## ⚙️ Technologies Used
 
-```bash
-# Step 1: Deploy OpenStack
-→ Follow 01-devstack-install.md
+- **OpenStack Zed** (via Kolla Ansible)
+- **Keycloak v23.0.7** (Docker-based)
+- **OIDC Protocol**
+- **HAProxy TLS Termination**
+- **Horizon WebSSO**
+- **Ubuntu 22.04**
 
-# Step 2: Deploy Keycloak
-→ Follow 02-keycloak-setup.md
+---
 
-# Step 3: Add TLS/HTTPS via Nginx
-→ Follow 03-SSL_TLS.md
+## 🔧 Prerequisites
 
-# Step 4: Configure Keystone Federation (OIDC)
-→ Follow 04-openstack-oidc-setup.md
+- Ubuntu 22.04 VM or bare metal
+- Docker + Docker Compose
+- Ansible + Python 3.9+
+- At least 8 GB RAM and 50 GB storage
+- DNS or `/etc/hosts` entry for `<YOUR_HORIZON_IP>`
 
-# Step 5: Add OIDC Mapping Rules
-→ Follow 05-keycloak_mapping.md
+---
 
-# Step 6: Enable Horizon WebSSO Login
-→ Follow 06-websso-horizon-settings.md
+## 🚀 High-Level Setup Flow
+
+```text
+1. Deploy OpenStack via Kolla → [01-devstack-install.md]
+2. Deploy Keycloak in Docker → [02-keycloak-setup.md]
+3. Configure HAProxy TLS for OpenStack → [03-SSL_TLS.md]
+4. Enable Keystone Federation + OIDC → [04-openstack-oidc-setup.md]
+5. Apply user/group mapping rules → [05-keycloak_mapping.md]
+6. Enable WebSSO login in Horizon → [06-websso-horizon-settings.md]
+7. Test Web login and CLI token issuance
+
+
+
+
+## 📄 License
+
+MIT License — Free to use, share, and contribute.
+
+---
+
+##  References
+
+- [OpenStack Keystone Federation Docs](https://docs.openstack.org/keystone/latest/admin/federation/)
+- [Keycloak Documentation](https://www.keycloak.org/documentation)
+- [OWASP OAuth2 Best Practices](https://owasp.org/www-project-oauth-security-top-10/)
