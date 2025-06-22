@@ -42,18 +42,23 @@ ssh localhost
 ```
 # Globals configuration
 ```bash
-sudo tee /etc/kolla/globals.yml <<EOF
 workaround_ansible_issue_8743: yes
+openstack_release: "2024.1"
 kolla_base_distro: "ubuntu"
 kolla_base_distro_version: "jammy"
 kolla_install_type: "source"
-openstack_release: "zed"
-kolla_internal_vip_address: "192.168.64.200"
-network_interface: "ens33"
+kolla_internal_vip_address: "192.168.64.200"   
+network_interface: "ens33"  
 enable_horizon: "yes"
 enable_keystone: "yes"
 enable_cinder: "no"
-EOF
+enable_keystone_federation: "yes"
+enable_haproxy: "yes"
+horizon_http_port: 80
+config_strategy: COPY_ALWAYS
+
+kolla_enable_tls_internal: "yes"
+kolla_enable_tls_external: "yes"
 ```
 # Set passwords and inventory
 ```bash
