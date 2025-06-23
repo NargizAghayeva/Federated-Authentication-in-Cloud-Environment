@@ -10,8 +10,9 @@ To verify that all OpenStack service communications (especially Keystone via HAP
 ## Step-by-Step Instructions
 
 1. **Start Wireshark on client machine**:
-   ```bash
-   sudo wireshark
+```bash
+sudo wireshark
+```
 2. **Apply the following display filter to detect unencrypted data**:
 ```bash
 ip.addr == YOUR_HORIZON_IP && tcp.port == 5000
@@ -42,9 +43,6 @@ Protocol: TLSv1.3 confirmation
 
 ---
 
-Next file:
-
-### expected_outcome
 
 
 # Expected Outcome – TLS Sniffing & MITM Resistance
