@@ -1,10 +1,10 @@
-#  OpenStack + Keycloak Federated Authentication 
+# 🔐 OpenStack + Keycloak Federated Authentication 
 
 This repository provides a complete, modular, and production-capable setup guide for **federating OpenStack with Keycloak** using **OpenID Connect (OIDC)** and enabling **secure WebSSO login** via Horizon. TLS is terminated using **HAProxy**, built into the Kolla Ansible architecture.
 
 ---
 
-##  Documentation Structure
+## 📚 Documentation Structure
 
 | Step | File | Description |
 |------|------|-------------|
@@ -14,8 +14,9 @@ This repository provides a complete, modular, and production-capable setup guide
 | 4️⃣ | [`04-openstack-oidc-setup.md`](./04-openstack-oidc-setup.md) | Enable OIDC federation in Keystone |
 | 5️⃣ | [`05-keycloak_mapping.md`](./05-keycloak_mapping.md) | Define and apply mapping rules (OIDC ↔ Keystone) |
 | 6️⃣ | [`06-websso-horizon-settings.md`](./06-websso-horizon-settings.md) | Enable Horizon WebSSO with Keycloak |
+| 🔐 | [`security_tests/`](./security_tests/) | Simulated attack models (Redirect URI, Token Replay, PKCE, etc.) |
+| 📈 | [`performance_tests/performance_tests_cli.md`](./performance_tests/performance_tests_cli.md) | CLI-based performance & scalability benchmarking |
 | 🛠 | [`Common_issues.md`](./Common_issues.md) | Known issues and solutions during deployment |
-| 🧰 | [`troubleshooting.md`](./troubleshooting.md) | Logs, config checks, and validation tips |
 
 ---
 
@@ -50,18 +51,4 @@ This repository provides a complete, modular, and production-capable setup guide
 5. Apply user/group mapping rules → [05-keycloak_mapping.md]
 6. Enable WebSSO login in Horizon → [06-websso-horizon-settings.md]
 7. Test Web login and CLI token issuance
-
-
-
-
-## 📄 License
-
-MIT License — Free to use, share, and contribute.
-
----
-
-##  References
-
-- [OpenStack Keystone Federation Docs](https://docs.openstack.org/keystone/latest/admin/federation/)
-- [Keycloak Documentation](https://www.keycloak.org/documentation)
-- [OWASP OAuth2 Best Practices](https://owasp.org/www-project-oauth-security-top-10/)
+8. Perform security and performance tests → [security_tests/, performance_tests/]
