@@ -1,17 +1,15 @@
-#!/bin/bash
-
 # Redirect URI Manipulation Test Script
 # Simulates an attack with a tampered redirect_uri in the WebSSO flow.
-
+```bash
 TARGET="https://YOUR_HORIZON_IP:5000/v3/auth/OS-FEDERATION/websso/oidc"
 FAKE_REDIRECT="https://evil.com/callback"
 CLIENT_ID="openstack"
 REALM="openstack"
-
+```
 echo "[*] Sending forged redirect_uri to simulate unauthorized redirection..."
-
+```bash
 curl -k -i -X GET "$TARGET?client_id=$CLIENT_ID&redirect_uri=$FAKE_REDIRECT&response_type=code&scope=openid&state=1234"
-
+```
 # Redirect URI Manipulation – Test Steps
 
 ## Objective
@@ -24,10 +22,11 @@ To test whether Keystone or Apache OIDC allows redirection to unauthorized `redi
 ## Step-by-Step Instructions
 
 1. **Locate the real WebSSO redirect endpoint**:
+```bash
 https://<YOUR_HORIZON_IP>:5000/v3/auth/OS-FEDERATION/websso/oidc
+```
 
-
-2. **Craft a request with a fake `redirect_uri`**:
+3. **Craft a request with a fake `redirect_uri`**:
 Use a script like `curl_test.sh` or run manually:
 ```bash
 curl -k -i -X GET \
